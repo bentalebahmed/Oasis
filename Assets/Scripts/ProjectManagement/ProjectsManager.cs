@@ -45,6 +45,7 @@ public class ProjectsManager : MonoBehaviour
         nodeEditorWindow.gameObject.SetActive(false);
 
         appDataPath = Path.Combine(Application.persistentDataPath, "projects_list.json");
+        Debugger.Log($"Projects list path: {appDataPath}", "ProjectsManager");
         LoadProjects();
     }
 
