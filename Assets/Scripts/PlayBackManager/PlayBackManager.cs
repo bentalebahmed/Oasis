@@ -47,6 +47,7 @@ public class PlayBackManager : MonoBehaviour
 
         if (graph.nodes == null || seq.seqDatas == null)
         {
+            // TODO: notif could not load experience data
             Debugger.Error("Couldn't load experience data");
             return;
         }
@@ -310,86 +311,4 @@ public class PlayBackManager : MonoBehaviour
         yield return null;
         Close();
     }
-    /*
-    IEnumerator PlayExperiance()
-    {
-        // pass the start seqData as args and create search function to search for the next seqData using nextNodeID
-        // while((data.nextNodeID != "end"
-        foreach (SeqData data in seqNodes)
-        {
-            if (data.currentNodeID == "start")
-            {
-                Debugger.Log($"Starting playback");
-                playBackWindow.gameObject.SetActive(true);
-            }
-            else if (data.nextNodeID == "end")
-            {
-                Debugger.Log($"Ending playback");
-                //HideAll();
-                yield break;
-            }
-            else
-            {
-                NodeData currentNode = nodes.FirstOrDefault(node => node.id == data.currentNodeID);
-                string type = currentNode.path.Replace("Nodes/", "");
-
-                Debugger.Log($"current node: {type}");
-
-                switch (type)
-                {
-                    case "scene_node":
-                        string bgPath = GetNodeData(currentNode, "bgPath");
-                        bool fadeIn = GetNodeData(currentNode, "fadeIn") == "1";
-                        bool fadeOut = GetNodeData(currentNode, "fadeOut") == "1";
-                        float fadeInDuration = float.TryParse(GetNodeData(currentNode, "fadeInDuration"), out float t1) ? t1 : 1f;
-                        float fadeOutDuration = float.TryParse(GetNodeData(currentNode, "fadeOutDuration"), out float t2) ? t2 : 1f;
-
-                        if (!string.IsNullOrEmpty(bgPath))
-                        {
-                            yield return StartCoroutine(SetScene(bgPath, fadeIn, fadeOut, fadeInDuration, fadeOutDuration));
-                            yield return new WaitForSeconds(1f);
-                        }
-                        break;
-                    case "talk_node":
-                        string rawLines = GetNodeData(currentNode, "talkLines");
-
-                        if (!string.IsNullOrEmpty(rawLines))
-                        {
-                            string[] talkLines = rawLines.Split(new string[] { "||" }, StringSplitOptions.None);
-                            bool isClick = GetNodeData(currentNode, "isClick") == "1";
-
-                            nextTalkBt.gameObject.SetActive(isClick);
-
-                            talkPreview.SetActive(talkLines.Length > 0);
-
-                            foreach (string line in talkLines)
-                            {
-                                isNxtTalk = false;
-                                DisplayTalk(line);
-
-                                if (isClick) yield return new WaitUntil(() => isNxtTalk);
-                                else yield return new WaitForSeconds(talkDelay * line.Length);
-
-                                isNxtTalk = false;
-                            }
-
-                            talkPreview.SetActive(false);
-                            talkText.text = "";
-                        }
-                        break;
-                    case "logic_node":
-                        break;
-
-                }
-            }
-
-            //yield return new WaitForSeconds(1f);
-        }
-        //yield return new WaitForSeconds(5f);
-
-        yield return null;
-    }
-
-    */
-
 }

@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RuntimeNodeEditor;
 using UnityEngine.UI;
-using System;
 using CustomNodeEditor;
 
 public class SceneNode : Node
@@ -24,7 +22,7 @@ public class SceneNode : Node
         Register(input);
         Register(output);
 
-        SetHeader("BACKGROUND");
+        SetHeader("SCENE");
 
         OnConnectionEvent += OnConnection;
         OnDisconnectEvent += OnDisconnect;
@@ -70,9 +68,6 @@ public class SceneNode : Node
 
             ProjectsManager.Instance.SaveResourcesFile(ID + ".bg", bgImage);
         }
-
-
-
     }
 
     private void OnConnection(SocketInput input, IOutput output)

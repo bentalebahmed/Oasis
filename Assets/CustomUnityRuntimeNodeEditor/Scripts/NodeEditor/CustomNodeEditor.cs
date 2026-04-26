@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using RuntimeNodeEditor;
 using UnityEngine.EventSystems;
@@ -16,12 +14,10 @@ namespace CustomNodeEditor
         public string index;
     }
 
-
     public class Seq
     {
         public SeqData[] seqDatas;
     }
-
 
     public class CustomNodeEditor : NodeEditor
     {
@@ -29,7 +25,6 @@ namespace CustomNodeEditor
         [SerializeField] private Color bgColor;
         public TGraphComponent CreateGraph<TGraphComponent>(RectTransform holder, Color connectionColor, Sprite bgImage = null) where TGraphComponent : NodeGraph
         {
-            //Color color = ColorUtility.TryParseHtmlString("#2E333F", out var c) ? c : Color.gray;
             var nodeGraph = base.CreateGraph<TGraphComponent>(holder, Color.red, connectionColor);
 
             holder.GetChild(0).GetComponent<RectTransform>().localScale = Vector3.one;
@@ -44,23 +39,20 @@ namespace CustomNodeEditor
             else
             {
                 bg.color = bgColor;
-                //bg.color = color;
             }
-
             return nodeGraph;
         }
 
         public override void StartEditor(NodeGraph graph)
         {
             base.StartEditor(graph);
-            // TODO: add initialization
 
             Graph.SetSize(Vector2.one * 20000);
 
-            Events.OnGraphPointerClickEvent += OnGraphPointerClick;
+            //Events.OnGraphPointerClickEvent += OnGraphPointerClick;
             Events.OnNodePointerClickEvent += OnNodePointerClick;
             Events.OnConnectionPointerClickEvent += OnNodeConnectionPointerClick;
-            Events.OnSocketConnect += OnConnect;
+            //Events.OnSocketConnect += OnConnect;
         }
 
         public void InitStartEndNodes()
@@ -87,7 +79,6 @@ namespace CustomNodeEditor
         public void SaveGraph(string savePath)
         {
             Graph.SaveFile(savePath);
-
         }
 
         public void LoadGraph(string savePath)
@@ -99,26 +90,6 @@ namespace CustomNodeEditor
         public void Clear()
         {
             Graph.Clear();
-        }
-
-        private void OnGraphPointerClick(PointerEventData eventdata)
-        {
-            //switch (eventdata.button)
-            //{
-            //    case PointerEventData.InputButton.Right:
-            //        var ctx = new ContextMenuBuilder()
-            //            .Add("Node/START", () => Graph.Create("Nodes/start_node"))
-            //            .Add("Node/END", () => Graph.Create("Nodes/end_node"))
-            //            .Add("Node/TALK", () => Graph.Create("Nodes/talk_node"))
-            //            .Add("Node/SCENE", () => Graph.Create("Nodes/scene_node"))
-            //            .Build();
-            //        SetContextMenu(ctx);
-            //        DisplayContextMenu();
-            //        break;
-            //    case PointerEventData.InputButton.Left:
-            //        CloseContextMenu();
-            //        break;
-            //}
         }
 
         private void OnNodePointerClick(Node node, PointerEventData eventData)
@@ -140,15 +111,6 @@ namespace CustomNodeEditor
             }
             else if (eventData.clickCount == 1 && eventData.button.Equals(PointerEventData.InputButton.Right))
             {
-                //var ctx = new ContextMenuBuilder()
-                //.Add("duplicate", () => DuplicateNode(node))
-                //.Add("clear connections", () => ClearConnections(node))
-                //.Add("delete", () => DeleteNode(node))
-                //.Build();
-
-                //SetContextMenu(ctx);
-                //DisplayContextMenu();
-
                 ClearConnections(node);
 
             }
@@ -157,29 +119,20 @@ namespace CustomNodeEditor
                 if (node is not StartNode && node is not EndNode)
                     DeleteNode(node);
             }
-
         }
 
         private void OnNodeConnectionPointerClick(string connId, PointerEventData eventData)
         {
             if (eventData.button == PointerEventData.InputButton.Right)
             {
-                //var ctx = new ContextMenuBuilder()
-                //.Add("clear connection", () => DisconnectConnection(connId))
-                //.Build();
-
-                //SetContextMenu(ctx);
-                //DisplayContextMenu();
-
-                DisconnectConnection(connId);
-
+                Disconnect(connId);
             }
         }
 
-        private void OnConnect(SocketInput arg1, SocketOutput arg2)
-        {
-            //Graph.drawer.SetConnectionColor(arg2.connection.connId, Color.green);
-        }
+        //private void OnConnect(SocketInput arg1, SocketOutput arg2)
+        //{
+        //    //Graph.drawer.SetConnectionColor(arg2.connection.connId, Color.green);
+        //}
 
         private void DeleteNode(Node node)
         {
@@ -189,10 +142,10 @@ namespace CustomNodeEditor
 
         private void DuplicateNode(Node node)
         {
-            Graph.Duplicate(node);
+            Graph.Duplicate(node);// Not used
         }
 
-        private void DisconnectConnection(string line_id)
+        private void Disconnect(string line_id)
         {
             Graph.Disconnect(line_id);
         }

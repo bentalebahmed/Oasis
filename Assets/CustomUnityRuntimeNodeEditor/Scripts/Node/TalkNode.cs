@@ -1,12 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Xml;
 using CustomNodeEditor;
 using RuntimeNodeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -144,25 +139,3 @@ public class TalkNode : Node
 
 
 }
-
-
-//object inputValue = _incomingOutputs.GetValue<object>();
-
-//List<string> jsonList;
-
-//if (inputValue is string str && str == "start")
-//{
-//    // Start node signal
-//    jsonList = new List<string>();
-//}
-//else if (inputValue is List<string> list)
-//{
-//    // Already a sequence of JSON strings
-//    jsonList = new List<string>(list);
-//}
-//else
-//{
-//    // Fallback: create a new list to avoid null
-//    jsonList = new List<string>();
-//    Debugger.Warning($"TalkNode received unexpected input type: {inputValue?.GetType()}", "TalkNode");
-//}

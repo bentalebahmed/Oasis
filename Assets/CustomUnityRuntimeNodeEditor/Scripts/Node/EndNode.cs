@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RuntimeNodeEditor;
-using System.Linq;
-using UnityEngine.UI;
 using CustomNodeEditor;
 
 public class EndNode : Node
@@ -25,11 +22,10 @@ public class EndNode : Node
         ProjectsManager.Instance.OnSaveProject += OnConnectedValueUpdated;
     }
 
-
     private void OnConnection(SocketInput input, IOutput output)
     {
         //output.ValueUpdated += OnConnectedValueUpdated;
-        if(!_incomingOutputs.Contains(output))
+        if (!_incomingOutputs.Contains(output))
             _incomingOutputs.Add(output);
 
         //_incomingOutputs = output;
@@ -55,12 +51,12 @@ public class EndNode : Node
 
         List<SeqData> mergedData = new();
 
-        foreach (var output in _incomingOutputs) 
+        foreach (var output in _incomingOutputs)
         {
-            if(output==null) continue;
+            if (output == null) continue;
 
             var value = output.GetValue<List<SeqData>>();
-            if(value == null || value.Count == 0) continue;
+            if (value == null || value.Count == 0) continue;
 
             var copy = new List<SeqData>(value);
 
@@ -81,7 +77,7 @@ public class EndNode : Node
             mergedData.AddRange(copy);
         }
 
-        if(mergedData.Count == 0)
+        if (mergedData.Count == 0)
         {
             ProjectsManager.Instance.SaveResourcesFile("seq.json", JsonUtility.ToJson("", true));
             return;
@@ -93,7 +89,7 @@ public class EndNode : Node
         foreach (var entry in mergedData)
         {
             string key = $"{entry.currentNodeID}-{entry.nextNodeID}";
-            if (seen.Add(key)) // only adds if not already seen
+            if (seen.Add(key)) // only adds it if not already seen
             {
                 uniqueList.Add(entry);
             }
@@ -105,69 +101,6 @@ public class EndNode : Node
         };
 
         ProjectsManager.Instance.SaveResourcesFile("seq.json", JsonUtility.ToJson(seq, true));
-
     }
 
-
 }
-
-//List<SeqData> value = _incomingOutputs.GetValue<List<SeqData>>();
-
-//if (value == null)
-//{
-//    ProjectsManager.Instance.SaveResourcesFile("seq.json", JsonUtility.ToJson("", true));
-//    return;
-//}
-
-//var lastSeqDataList = new List<SeqData>(value);
-
-//lastSeqDataList[^1].nextNodeID = ID;
-
-//SeqData seqData = new()
-//{
-//    currentNodeID = "end",
-//    nextNodeID = string.Empty
-//};
-
-//lastSeqDataList.Add(seqData);
-
-//Seq seq = new()
-//{
-//    seqDatas = lastSeqDataList.ToArray()
-//};
-
-//ProjectsManager.Instance.SaveResourcesFile("seq.json", JsonUtility.ToJson(seq, true));
-
-
-//if (_incomingOutputs == null)
-//{
-//    return;
-//}
-
-//object inputValue = _incomingOutputs.GetValue<object>();
-
-//List<string> jsonList;
-
-//if (inputValue is List<string> list)
-//{
-//    if (list.Count == 1 && list[0] == "\"start\"")
-//    {
-//        Debugger.Warning("Do not connect a start node to an end node");
-//        return;
-//    }
-
-//    // Copy the list
-//    jsonList = new List<string>(list);
-//}
-//else
-//{
-//    jsonList = new List<string>();
-//    Debugger.Warning($"EndNode received unexpected input type: {inputValue?.GetType()}", "EndNode");
-//}
-
-//// Add the end marker
-//jsonList.Add("\"end\"");
-
-
-//string combined = string.Join("\n---\n", jsonList);
-//Debugger.Log(combined, "EndNode");

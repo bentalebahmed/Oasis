@@ -1,16 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Security.Cryptography;
 using CustomNodeEditor;
 using RuntimeNodeEditor;
 using SFB;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 [Serializable]
 public class ProjectInfo
@@ -24,7 +20,6 @@ public class ProjectInfo
 
 public class ProjectsManager : MonoBehaviour
 {
-
     public static ProjectsManager Instance { get; private set; }
 
     [SerializeField] private NodeEditorManager nodeEditorManager;
@@ -90,7 +85,7 @@ public class ProjectsManager : MonoBehaviour
             };
 
             AddProject(projectInfo);
-            OpenEditProjectGraph(projectInfo);
+            //OpenEditProjectGraph(projectInfo);
         }
     }
 
@@ -146,7 +141,7 @@ public class ProjectsManager : MonoBehaviour
         var wrapper = JsonUtility.FromJson<Wrapper<ProjectInfo>>(json);
         Projects = wrapper?.list ?? new List<ProjectInfo>();
 
-        //Debugger.Log($"Projects {Projects.Count}", name);
+        Debugger.Log($"Projects {Projects.Count}", name);
 
         foreach (Transform pFolder in projectFoldersHolder.transform)
         {
@@ -199,7 +194,7 @@ public class ProjectsManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(new Wrapper<ProjectInfo> { list = Projects }, true);
         File.WriteAllText(appDataPath, json);
-        //Debugger.Log($"Project list saved at: {appDataPath}", name);
+        Debugger.Log($"Project list saved at: {appDataPath}", name);
         LoadProjects();
     }
 
@@ -252,7 +247,6 @@ public class ProjectsManager : MonoBehaviour
             File.WriteAllBytes(Path.Combine(pPath, fileName), file);
         }
     }
-
 
     public void SaveResourcesFile(string fileName, string file)
     {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using RuntimeNodeEditor;
 using UnityEngine;
@@ -8,28 +6,14 @@ namespace CustomNodeEditor
 {
     public class NodeEditorManager : MonoBehaviour
     {
-        //[SerializeField, TextArea] private string DEBUG;
         [Header("Editor params")]
-        //[SerializeField] private Sprite editorBackground;
         [SerializeField] private RectTransform editorHolder;
         [SerializeField] private CustomNodeEditor editor;
         [SerializeField] private GameObject nodesPanel;
         private string currentProjectPath;
 
-        //public static NodeEditorManager Instance { get; private set; }
-
-        // Start is called before the first frame update
-
         private void Awake()
         {
-            //if (Instance != null && Instance != this)
-            //{
-            //    Destroy(gameObject);
-            //    return;
-            //}
-
-            //Instance = this;
-
             currentProjectPath = string.Empty;
 
             // Set to windowed mode
@@ -81,7 +65,7 @@ namespace CustomNodeEditor
             if (string.IsNullOrEmpty(currentProjectPath))
             {
                 ///TODO: notif could not save project
-                //Debugger.Warning("Could not save project", name);
+                Debugger.Warning("Could not save project", name);
                 return string.Empty;
             }
 
@@ -93,7 +77,7 @@ namespace CustomNodeEditor
             if (string.IsNullOrEmpty(currentProjectPath))
             {
                 ///TODO: notif could not save project
-                //Debugger.Warning("Could not save project", name);
+                Debugger.Warning("Could not save project", name);
                 return string.Empty;
             }
 
