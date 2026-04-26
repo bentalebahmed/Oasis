@@ -46,18 +46,20 @@ Preview currently runs inside the application. The same preview logic can be reu
 
 ## Node Types
 
-- Start Node: Entry point of the graph.
-- End Node: Terminates execution.
-- Talk Node: Renders dialogue or instructional text.
-- Scene Node: Loads a background to define context.
-- Logic Node (True / False): Evaluates a condition and routes execution.
+- Start Node: Entry point of the graph
+- End Node: Terminates execution
+- Talk Node: Renders dialogue or instructional text
+- Scene Node: Loads a background to define context
+- Logic Node (True / False): Evaluates a condition and routes execution
   
 ---
 
 ## Controls
 
 - Right-click (single): remove connections from a node  
-- Right-click (double): delete node  
+- Right-click (double): delete node (except the start & end node)
+- Left-click (double): to edit node data (except the start & end node)
+- Left-click and hold: to drag and move a node
 
 ---
 
