@@ -6,8 +6,6 @@ Oasis is a minimal 2D Virtual Training Studio for building structured training e
 
 Built with Unity 6.3 LTS (6000.3.10f1).
 
----
-
 ## Features
 
 - Project lifecycle: create, add, save, load
@@ -26,8 +24,6 @@ Projects are stored as JSON entries within `projects_list.json`, located in the 
 }
 ```
 
----
-
 ## Project Structure
 
 The project directory includes:
@@ -42,8 +38,6 @@ This separation allows experiences to be portable across platforms. Runtime prev
 
 Preview currently runs inside the application. The same preview logic can be reused to build standalone targets (e.g., Android or HTML5).
 
----
-
 ## Node Types
 
 - Start Node: Entry point of the graph
@@ -51,8 +45,6 @@ Preview currently runs inside the application. The same preview logic can be reu
 - Talk Node: Renders dialogue or instructional text
 - Scene Node: Loads a background to define context
 - Logic Node (True / False): Evaluates a condition and routes execution
-  
----
 
 ## Controls
 
@@ -61,18 +53,13 @@ Preview currently runs inside the application. The same preview logic can be reu
 - Left-click (double): to edit node data (except the start & end node)
 - Left-click and hold: to drag and move a node
 
----
-
 ## How to Run
 
 ### Option 1 — Prebuilt
 Use the compressed build `Oasis_v0.0.1`
 
-
 ### Option 2 — Unity Editor
 Open the project in Unity (6000.3.10f1)  and press play  
-
----
 
 ## First Project
 `FirstProject` contains basic example flows, use the **Add** button to import and test it.
