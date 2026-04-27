@@ -1,6 +1,6 @@
 <p>
-  <img src="Images/Oasis00.png" width="45%" style="margin-right:10px;" />
-  <img src="Images/Oasis01.png" width="45%" />
+  <!-- <img src="Images/Oasis00.png" width="45%" style="margin-right:10px;" /> -->
+  <img src="Images/Oasis01.png" width="100%" />
 </p>
 
 # Oasis
